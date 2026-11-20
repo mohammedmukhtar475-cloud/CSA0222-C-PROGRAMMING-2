@@ -1,0 +1,22 @@
+#include <stdio.h>
+
+unsigned long checks = 0;
+
+int is_prime_optimized(unsigned long n) {
+    checks = 0;
+    if (n < 2) return 0;
+    if (n == 2 || n == 3) return 1;
+    if (n % 2 == 0) {
+        checks++;
+        return 0;
+    }
+    
+    // Check odd divisors only, up to sqrt(n)
+    for (unsigned long i = 3; i * i <= n; i += 2) {
+        checks++;
+        if (n % i == 0) {
+            return 0;
+        }
+    }
+    return 1;
+}

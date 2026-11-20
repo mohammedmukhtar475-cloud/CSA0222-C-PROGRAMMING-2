@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+int main(void) {
+    double balance = 10000.0;
+    double monthly_rate = 0.02; // 2% per month
+    double payment = 2000.0;
+    int month = 0;
+    double total_interest = 0.0;
+
+    printf("Month\tInterest\tPrincipal\tBalance\n");
+    while (balance > 0 && month < 360) {
+        month++;
+        double interest = balance * monthly_rate;
+        total_interest += interest;
+        balance += interest;
+
+        if (balance < payment) {
+            payment = balance;
+            balance = 0;
+        } else {
+            balance -= payment;
+        }
+        printf("%d\t%.2f\t\t%.2f\t\t%.2f\n", month, interest, payment - interest, balance);
+    }
+
+    printf("\nTotal Months: %d, Total Interest Paid: %.2f\n", month, total_interest);
+    return 0;
+}
